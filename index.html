@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,95 +9,132 @@
     <script src="https://kit.fontawesome.com/d3acb3ae7f.js" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo:ital@0;1&family=Open+Sans:wght@300&display=swap');
-        body{
-            background-color:#caf0f8 ;
-               }
-        nav{
+
+        body {
+            background-color: #caf0f8;
+        }
+
+        nav {
             background-color: #023047;
             overflow: auto;
             position: fixed;
-            top:0;
-            left:0;
-            right:0;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
         }
-        nav div{
-            float:left;
+
+        nav div {
+            float: left;
             display: inline-flex;
-            padding:20px;
+            padding: 30px;
             letter-spacing: 5px;
-            color:#caf0f8
+            color: #caf0f8;
+            font-family: 'Archivo', sans-serif;
+            font-size: 20px;
+
         }
-        nav ul li{
-            float: right;
-            
+
+        nav ul li {
+            display: inline-block;
+            margin-right: 10px;
+            padding: 30px;
+
         }
-        nav ul{
+
+        nav ul {
             list-style: none;
+            margin: 0;
+            padding: 0;
+            float: right;
         }
-        nav ul li a{
-            color:#caf0f8;
+
+        nav ul li a {
+            color: #caf0f8;
             padding: 20px;
             text-decoration: none;
             letter-spacing: 2px;
+            font-family: 'Open Sans', sans-serif;
         }
-        .top-section{
-            display:flex;
-            margin-top: 200px;
+
+        nav ul li:hover a {
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .top-section {
+            display: flex;
+            margin-top: 300px;
             margin-bottom: 200px;
         }
-        .left-section{
-            flex:50%;
+
+        .left-section {
+            flex: 50%;
         }
-        .right-section,.mid-section{
+
+        .right-section,
+        .mid-section {
             display: flex;
-            flex-direction:column;
-            position:relative;
-            flex:25%;
+            flex-direction: column;
+            position: relative;
+            flex: 25%;
         }
-        .icon{
-            padding:30px;
-            color:#ffb500;
+
+        .icon {
+            padding: 30px;
+            color: #ffb500;
             font-size: 40px;
         }
-        .len,.time{
+
+        .len,
+        .time {
             background-color: #023047;
             position: absolute;
             border-radius: 80px;
         }
-        .mass,.temp{
-            background-color:#ffb500;
+
+        .mass,
+        .temp {
+            background-color: #ffb500;
             position: absolute;
             border-radius: 80px;
         }
-        .len{
-            top:0;
+
+        .len {
+            top: 0;
             right: 90px;
         }
-        .mass{
-            bottom:0px;
+
+        .mass {
+            bottom: 0px;
         }
-        .time{
-            top:0;
+
+        .time {
+            top: 0;
             right: 90px;
         }
-        .temp{
-            bottom:0px;
+
+        .temp {
+            bottom: 0px;
         }
-        .left-section span{
-            font-family: 'Archivo',sans-serif;
+
+        .left-section span {
+            font-family: 'Archivo', sans-serif;
             font-size: 30px;
             letter-spacing: 4px;
-            color:#023047;
+            color: #023047;
             padding-left: 30px;
         }
-        .left-section p{
-            font-family: 'Open Sans',sans-serif;
+
+        .left-section p {
+            font-family: 'Open Sans', sans-serif;
             font-size: 20px;
             letter-spacing: 1px;
             color: #023047;
             padding-left: 50px;
             margin-top: -30px;
         }
+
         .line {
             width: 300px;
             height: 50px;
@@ -104,120 +142,191 @@
             border-color: #ffb500 transparent transparent transparent;
             border-radius: 30%/10px 10px 0 0;
             position: absolute;
-             animation-name: flow;
-             animation-duration: 1s;
-             animation-timing-function: ease-out;
-             animation-fill-mode: forwards;
-             animation-delay: 1s;
+            animation-name: flow;
+            animation-duration: 1s;
+            animation-timing-function: ease-out;
+            animation-fill-mode: forwards;
+            animation-delay: 1s;
         }
-        .output-value-container{
+
+        .output-value-container {
             background-color: #ffb500;
-            height:20px;
-            width:40px;
+            height: 20px;
+            width: 40px;
         }
-    
+
         @keyframes flow {
-          0% {
-            transform: translateX(-100%); /* move 100% left */
-          }
-          100% {
-            transform: translateX(0); /* move back to original position */
-            opacity:1;
-          }
+            0% {
+                transform: translateX(-100%);
+                /* move 100% left */
+            }
+
+            100% {
+                transform: translateX(0);
+                /* move back to original position */
+                opacity: 1;
+            }
         }
-        .anim{
+
+        .anim {
             position: relative;
             overflow: hidden;
-            width:500px;
-            height:50px;
+            width: 500px;
+            height: 50px;
             margin-left: 200px;
         }
-        .length-converter,.mass-converter,.time-converter,.temperature-converter{
+
+        .length-converter,
+        .mass-converter,
+        .time-converter,
+        .temperature-converter {
             position: relative;
-            width:100%;
-            height:600px;
-            margin-bottom: 200px;
+            width: 100%;
+            height: 600px;
             background-color: #bddcec;
+
+            padding-top: 120px;
         }
-        .inner-length,.inner-mass,.inner-time,.inner-temp{
-            position:absolute;
-            top:50%;
-            left:50%;
-            transform:translate(-50%,-50%);
-            background-color:#ffb500;
+
+        .inner-length,
+        .inner-mass,
+        .inner-time,
+        .inner-temp {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffb500;
             padding: 100px;
             border-radius: 60px;
             border-left: 2px solid #054e72;
+            margin-top: 100px;
         }
-        .input-unit,.output-unit{
+
+        .input-unit,
+        .output-unit {
             margin-bottom: 10px;
             padding: 5px;
             margin-left: 20px;
             font-size: 20px;
             background-color: #023047;
-            color:#caf0f8;
-            
+            color: #caf0f8;
+
         }
-        form label{
-            color:#023047;
+
+        form label {
+            color: #023047;
             font-size: 20px;
-            font-family: 'Open Sans',sans-serif;
+            font-family: 'Open Sans', sans-serif;
             font-weight: 600;
             letter-spacing: 2px;
         }
-        input[type=number]{
+
+        input[type=number] {
             background-color: #023047;
-            color:#caf0f8;
+            color: #caf0f8;
             font-size: 20px;
-            width:100px;
+            width: 100px;
             margin-left: 20px;
             margin-bottom: 15px;
         }
-        input[type=button]{
+
+        input[type=button] {
             background-color: #023047;
-            color:#caf0f8;
+            color: #caf0f8;
             padding: 7px;
-            font-family: 'Open Sans',sans-serif;
+            font-family: 'Open Sans', sans-serif;
             font-size: 15px;
             border-radius: 10px;
             letter-spacing: 2px;
             border: none;
         }
-        input[type=button]:hover{
+
+        input[type=button]:hover {
             background-color: #054e72;
             cursor: pointer;
         }
-        .info p{
-            font-family: 'Archivo',sans-serif;
+
+        .info p {
+            font-family: 'Archivo', sans-serif;
             font-size: 30px;
             color: #023047;
             letter-spacing: 2px;
         }
+
         /*#output-l-value{
             font-size: 20px;
             color: #023047;
             font-family: 'Open Sans',sans-serif;
         }*/
+        .left-footer,
+        .right-footer {
+            padding: 100px;
 
+        }
+
+        .right-footer ul {
+            list-style: none;
+
+        }
+
+        .right-footer ul li {
+            margin-bottom: 10px;
+        }
+
+        .right-footer ul li {
+            color: #caf0f8;
+            font-family: 'Archivo', sans-serif;
+            font-size: 15px;
+            text-decoration: none;
+            letter-spacing: 3px;
+        }
+
+        .f-icon {
+            margin: 6px;
+            font-size: 20px;
+            color: #caf0f8;
+        }
+
+        .f-brand {
+            font-family: 'Archivo', sans-serif;
+            letter-spacing: 5px;
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #bddcec
+        }
+
+        .end-footer {
+            background-color: #023047;
+            margin-top: -10px;
+        }
+
+        .end-footer p {
+            padding-bottom: 20px;
+            text-align: center;
+            font-family: 'Archivo', sans-serif;
+            color: #caf0f8;
+        }
     </style>
 </head>
+
 <body>
     <nav>
-        <div class="brand-name"> Jumble Unit</div>
+        <div class="brand-name"> JUMBLE UNIT</div>
         <ul>
-            <li><a href="#length-converter">Length</a></li>
-            <li><a href="#time-converter">Time</a></li>
-            <li><a href="#mass-converter">Mass</a></li>
-            <li><a href="#temperature-converter">Temperature</a></li>
+            <li><a href=".length-converter">Length</a></li>
+            <li><a href=".mass-converter">Mass</a></li>
+            <li><a href=".time-converter">Time</a></li>
+            <li><a href=".temperature-converter">Temperature</a></li>
         </ul>
     </nav>
     <section class="top-section">
         <div class="left-section">
-                <span>Welcome to Jumble Units</span>
-                <div class="anim">
-                    <div class="line"></div>
-                </div>
-                <p>
+            <span>Welcome to Jumble Units</span>
+            <div class="anim">
+                <div class="line"></div>
+            </div>
+            <p>
                 Having trouble in converting units?<br>
                 We got u! Convert units in no time
             </p>
@@ -229,17 +338,17 @@
             <div class="mass">
                 <i class="fa-solid fa-weight-scale icon" style="color:#023047;"></i>
             </div>
-            </div>
-            <div class="right-section">
+        </div>
+        <div class="right-section">
             <div class="time">
-                <i class="fa-regular fa-clock icon" ></i>
+                <i class="fa-regular fa-clock icon"></i>
             </div>
             <div class="temp">
                 <i class="fa-solid fa-temperature-high icon" style="color:#023047"></i>
             </div>
         </div>
     </section>
-    
+
     <section class="length-converter">
         <div class="info" style="display: flex;">
             <i class="fa-solid fa-ruler icon"></i>
@@ -265,8 +374,8 @@
                 <input type="number" id="input-l-value"><br>
                 <input type="button" value="Convert" onclick="lengthConverter()"><br>
             </form>
-                <p class="output-value" id="output-l-value"></p>
-            
+            <p class="output-value" id="output-l-value"></p>
+
         </div>
     </section>
     <section class="mass-converter">
@@ -297,7 +406,7 @@
     </section>
     <section class="time-converter">
         <div class="info" style="display: flex;">
-            <i class="fa-regular fa-clock icon" ></i>
+            <i class="fa-regular fa-clock icon"></i>
             <p>Let's convert time !</p>
         </div>
         <div class="inner-time">
@@ -342,142 +451,56 @@
                 </select><br>
                 <label for="input-value">Input value:</label>
                 <input type="number" id="input-temp-value"><br>
-                <input type="button" value="Convert"><br>
-                <div id="output-value-container">
-                    <p class="output-value" id="output-temp-value"></p>
-                </div>
+                <input type="button" value="Convert" onclick="tempConverter()"><br>
             </form>
+            <p class="output-value" id="output-temp-value"></p>
         </div>
     </section>
-    <script>
-        function lengthConverter(){
-            const input_l_unit=document.getElementById("input-l-unit").value;
-            const output_l_unit=document.getElementById("output-l-unit").value;
-            const input_l_value=document.getElementById("input-l-value").value;
-
-            //converting input value to meters
-            let meters;
-            switch(input_l_unit){
-                case'cm':
-                    meters=input_l_value/100;
-                    break;
-                case 'in':
-                    meters=input_l_value*0.0254;
-                    break;
-                case 'ft':
-                    meters=input_l_value*0.3048;
-                    break;
-                case 'm':
-                    meters=input_l_value;
-                    break;
-            }
-            
-            //now converting meter value into output unit value
-            let output_l_value;
-            switch(output_l_unit){
-                case 'cm':
-                    output_l_value=meters*100;
-                    break;
-                case 'm':
-                    output_l_value=meters;
-                    break;
-                case 'in':
-                    output_l_value=meters*39.3701;
-                    break;
-                case 'ft':
-                    output_l_value=meters*3.28084;
-                    break;
-            }
-            
-            const outputValueElement=document.getElementById("output-l-value");
-            outputValueElement.innerHTML=`${input_l_value} ${input_l_unit}=${output_l_value.toFixed(2)}${output_l_unit}`;
-            outputValueElement.style.color="#023047";
-            outputValueElement.style.fontSize="30px";
-            outputValueElement.style.fontFamily="Open Sans, sans-serif";
-        }
-
-        function massConverter()
-        {
-            const input_m_unit=document.getElementById("input-m-unit").value;
-            const input_m_value=document.getElementById("input-m-value").value;
-            const output_m_unit=document.getElementById("output-m-unit").value;
-
-            //converting input value to kilograms first
-            let kilograms;
-            switch(input_m_unit){
-                case 'kg':
-                    kilograms=input_m_value;
-                    break;
-                case 'g':
-                    kilograms=input_m_value/1000;
-                    break;
-                case 'ton':
-                    kilograms=input_m_value*1000;
-                    break;
-            }
-            //now converting kilograms to output unit
-            let output_m_value;
-            switch(output_m_unit){
-                case 'kg':
-                    output_m_value=kilograms;
-                    break;
-                case 'g':
-                    output_m_value=kilograms*1000;
-                    break;
-                case 'ton':
-                    output_m_value=kilograms/1000;
-                    break;
-
-            }
-            const outputValueElement2=document.getElementById("output-m-value");
-            outputValueElement2.innerHTML=`${input_m_value} ${input_m_unit}=${output_m_value.toFixed(2)}${output_m_unit}`;
-            outputValueElement2.style.color="#023047";
-            outputValueElement2.style.fontSize="30px";
-            outputValueElement2.style.fontFamily="Open Sans, sans-serif"; 
-
-        }
-
-        function timeConverter()
-        {
-            const input_t_unit=document.getElementById("input-t-unit").value;
-            const input_t_value=document.getElementById("input-t-value").value;
-            const output_t_unit=document.getElementById("output-t-unit").value;
-
-            //converting input value to minutes first
-            let min;
-            switch(input_t_unit){
-                case 'min':
-                    min=input_t_value;
-                    break;
-                case 'sec':
-                    min=input_t_value/60;
-                    break;
-                case 'hr':
-                    min=input_t_value*60;
-                    break;
-            }
-            //now converting kilograms to output unit
-            let output_t_value;
-            switch(output_t_unit){
-                case 'min':
-                    output_t_value=min;
-                    break;
-                case 'sec':
-                    output_t_value=min*60;
-                    break;
-                case 'hr':
-                    output_t_value=min/60;
-                    break;
-
-            }
-            const outputValueElement3=document.getElementById("output-t-value");
-            outputValueElement3.innerHTML=`${input_t_value} ${input_t_unit}=${output_t_value.toFixed(2)}${output_t_unit}`;
-            outputValueElement3.style.color="#023047";
-            outputValueElement3.style.fontSize="30px";
-            outputValueElement3.style.fontFamily="Open Sans, sans-serif"; 
-
-        }
+    <footer style="background-color: #023047; display: flex; margin-top: 200px;">
+        <div class="left-footer" style="flex:50%; display: flex; flex-direction: column;">
+            <div class="f-brand">JUMBLE UNIT</div>
+            <div>
+                <a href="#">
+                    <i class="fa-brands fa-instagram f-icon"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-brands fa-facebook f-icon"></i>
+                </a>
+                <a href="#">
+                    <i class="fa-brands fa-twitter f-icon"></i>
+                </a>
+            </div>
+        </div>
+        <div class="right-footer" style="flex:50%; display: flex; flex-direction: column;">
+            <div class="f-brand" style="margin-left: 15px;">Contacts</div>
+            <ul>
+                <li>PHONE: </li>
+                <li style="font-size: 12px; margin-bottom: 20px;">01-4564780</li>
+                <li>EMAIL:</li>
+                <li style="font-size: 12px; margin-bottom: 20px;">jumble7@gmail.com</li>
+                <li>ADDRESS:</li>
+                <li style="font-size: 12px; margin-bottom: 20px;"> Nameless Town, Somewhere</li>
+            </ul>
+        </div>
+    </footer>
+    <div class="end-footer">
+        <hr>
+        <p>JUMBLE UNIT &copy;2023</p>
+    </div>
+    <script src="script.js">
     </script>
-    
+    <script>
+        const navLinks = document.querySelectorAll("nav a");
+        navLinks.forEach(link => {
+            link.addEventListener("click", event => {
+                event.preventDefault();
+                const targetId = link.getAttribute("href");
+                const targetElement = document.querySelector(targetId);
+                targetElement.scrollIntoView({ behavior: "smooth" });
+            });
+        });
+    </script>
+
 </body>
+
 </html>
