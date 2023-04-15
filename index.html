@@ -193,6 +193,11 @@
             color: #023047;
             letter-spacing: 2px;
         }
+        /*#output-l-value{
+            font-size: 20px;
+            color: #023047;
+            font-family: 'Open Sans',sans-serif;
+        }*/
 
     </style>
 </head>
@@ -258,7 +263,7 @@
                 </select><br>
                 <label for="input-value">Input value:</label>
                 <input type="number" id="input-l-value"><br>
-                <input type="button" value="Convert" onclick="length()"><br>
+                <input type="button" value="Convert" onclick="lengthConverter()"><br>
             </form>
                 <p class="output-value" id="output-l-value"></p>
             
@@ -285,11 +290,9 @@
                 </select><br>
                 <label for="input-value">Input value:</label>
                 <input type="number" id="input-m-value"><br>
-                <input type="button" value="Convert"><br>
-                <div id="output-value-container">
-                    <p class="output-value" id="output-m-value"></p>
-                </div>
+                <input type="button" value="Convert" onclick="massConverter()"><br>
             </form>
+            <p class="output-value" id="output-m-value"></p>
         </div>
     </section>
     <section class="time-converter">
@@ -313,11 +316,9 @@
                 </select><br>
                 <label for="input-value">Input value:</label>
                 <input type="number" id="input-t-value"><br>
-                <input type="button" value="Convert"><br>
-                <div id="output-value-container">
-                    <p class="output-value" id="output-t-value"></p>
-                </div>
+                <input type="button" value="Convert" onclick="timeConverter()"><br>
             </form>
+            <p class="output-value" id="output-t-value"></p>
         </div>
     </section>
     <section class="temperature-converter">
@@ -349,7 +350,7 @@
         </div>
     </section>
     <script>
-        function length(){
+        function lengthConverter(){
             const input_l_unit=document.getElementById("input-l-unit").value;
             const output_l_unit=document.getElementById("output-l-unit").value;
             const input_l_value=document.getElementById("input-l-value").value;
@@ -387,9 +388,94 @@
                     output_l_value=meters*3.28084;
                     break;
             }
-            alert(output_l_value);
+            
             const outputValueElement=document.getElementById("output-l-value");
             outputValueElement.innerHTML=`${input_l_value} ${input_l_unit}=${output_l_value.toFixed(2)}${output_l_unit}`;
+            outputValueElement.style.color="#023047";
+            outputValueElement.style.fontSize="30px";
+            outputValueElement.style.fontFamily="Open Sans, sans-serif";
+        }
+
+        function massConverter()
+        {
+            const input_m_unit=document.getElementById("input-m-unit").value;
+            const input_m_value=document.getElementById("input-m-value").value;
+            const output_m_unit=document.getElementById("output-m-unit").value;
+
+            //converting input value to kilograms first
+            let kilograms;
+            switch(input_m_unit){
+                case 'kg':
+                    kilograms=input_m_value;
+                    break;
+                case 'g':
+                    kilograms=input_m_value/1000;
+                    break;
+                case 'ton':
+                    kilograms=input_m_value*1000;
+                    break;
+            }
+            //now converting kilograms to output unit
+            let output_m_value;
+            switch(output_m_unit){
+                case 'kg':
+                    output_m_value=kilograms;
+                    break;
+                case 'g':
+                    output_m_value=kilograms*1000;
+                    break;
+                case 'ton':
+                    output_m_value=kilograms/1000;
+                    break;
+
+            }
+            const outputValueElement2=document.getElementById("output-m-value");
+            outputValueElement2.innerHTML=`${input_m_value} ${input_m_unit}=${output_m_value.toFixed(2)}${output_m_unit}`;
+            outputValueElement2.style.color="#023047";
+            outputValueElement2.style.fontSize="30px";
+            outputValueElement2.style.fontFamily="Open Sans, sans-serif"; 
+
+        }
+
+        function timeConverter()
+        {
+            const input_t_unit=document.getElementById("input-t-unit").value;
+            const input_t_value=document.getElementById("input-t-value").value;
+            const output_t_unit=document.getElementById("output-t-unit").value;
+
+            //converting input value to minutes first
+            let min;
+            switch(input_t_unit){
+                case 'min':
+                    min=input_t_value;
+                    break;
+                case 'sec':
+                    min=input_t_value/60;
+                    break;
+                case 'hr':
+                    min=input_t_value*60;
+                    break;
+            }
+            //now converting kilograms to output unit
+            let output_t_value;
+            switch(output_t_unit){
+                case 'min':
+                    output_t_value=min;
+                    break;
+                case 'sec':
+                    output_t_value=min*60;
+                    break;
+                case 'hr':
+                    output_t_value=min/60;
+                    break;
+
+            }
+            const outputValueElement3=document.getElementById("output-t-value");
+            outputValueElement3.innerHTML=`${input_t_value} ${input_t_unit}=${output_t_value.toFixed(2)}${output_t_unit}`;
+            outputValueElement3.style.color="#023047";
+            outputValueElement3.style.fontSize="30px";
+            outputValueElement3.style.fontFamily="Open Sans, sans-serif"; 
+
         }
     </script>
     
