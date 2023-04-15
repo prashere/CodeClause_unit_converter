@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jumble Units</title>
+    <script src="https://kit.fontawesome.com/d3acb3ae7f.js" crossorigin="anonymous"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Archivo:ital@0;1&family=Open+Sans:wght@300&display=swap');
+        body{
+            background-color:#caf0f8 ;
+               }
+        nav{
+            background-color: #023047;
+            overflow: auto;
+            position: fixed;
+            top:0;
+            left:0;
+            right:0;
+        }
+        nav div{
+            float:left;
+            display: inline-flex;
+            padding:20px;
+            letter-spacing: 5px;
+            color:#caf0f8
+        }
+        nav ul li{
+            float: right;
+            
+        }
+        nav ul{
+            list-style: none;
+        }
+        nav ul li a{
+            color:#caf0f8;
+            padding: 20px;
+            text-decoration: none;
+            letter-spacing: 2px;
+        }
+        .top-section{
+            display:flex;
+            margin-top: 200px;
+            margin-bottom: 200px;
+        }
+        .left-section{
+            flex:50%;
+        }
+        .right-section,.mid-section{
+            display: flex;
+            flex-direction:column;
+            position:relative;
+            flex:25%;
+        }
+        .icon{
+            padding:30px;
+            color:#ffb500;
+            font-size: 40px;
+        }
+        .len,.time{
+            background-color: #023047;
+            position: absolute;
+            border-radius: 80px;
+        }
+        .mass,.temp{
+            background-color:#ffb500;
+            position: absolute;
+            border-radius: 80px;
+        }
+        .len{
+            top:0;
+            right: 90px;
+        }
+        .mass{
+            bottom:0px;
+        }
+        .time{
+            top:0;
+            right: 90px;
+        }
+        .temp{
+            bottom:0px;
+        }
+        .left-section span{
+            font-family: 'Archivo',sans-serif;
+            font-size: 30px;
+            letter-spacing: 4px;
+            color:#023047;
+            padding-left: 30px;
+        }
+        .left-section p{
+            font-family: 'Open Sans',sans-serif;
+            font-size: 20px;
+            letter-spacing: 1px;
+            color: #023047;
+            padding-left: 50px;
+            margin-top: -30px;
+        }
+        .line {
+            width: 300px;
+            height: 50px;
+            border: solid 5px #ffb500;
+            border-color: #ffb500 transparent transparent transparent;
+            border-radius: 30%/10px 10px 0 0;
+            position: absolute;
+             animation-name: flow;
+             animation-duration: 1s;
+             animation-timing-function: ease-out;
+             animation-fill-mode: forwards;
+             animation-delay: 1s;
+        }
+        .output-value-container{
+            background-color: #ffb500;
+            height:20px;
+            width:40px;
+        }
+    
+        @keyframes flow {
+          0% {
+            transform: translateX(-100%); /* move 100% left */
+          }
+          100% {
+            transform: translateX(0); /* move back to original position */
+            opacity:1;
+          }
+        }
+        .anim{
+            position: relative;
+            overflow: hidden;
+            width:500px;
+            height:50px;
+            margin-left: 200px;
+        }
+        .length-converter,.mass-converter,.time-converter,.temperature-converter{
+            position: relative;
+            width:100%;
+            height:600px;
+            margin-bottom: 200px;
+            background-color: #bddcec;
+        }
+        .inner-length,.inner-mass,.inner-time,.inner-temp{
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            background-color:#ffb500;
+            padding: 100px;
+            border-radius: 60px;
+            border-left: 2px solid #054e72;
+        }
+        .input-unit,.output-unit{
+            margin-bottom: 10px;
+            padding: 5px;
+            margin-left: 20px;
+            font-size: 20px;
+            background-color: #023047;
+            color:#caf0f8;
+            
+        }
+        form label{
+            color:#023047;
+            font-size: 20px;
+            font-family: 'Open Sans',sans-serif;
+            font-weight: 600;
+            letter-spacing: 2px;
+        }
+        input[type=number]{
+            background-color: #023047;
+            color:#caf0f8;
+            font-size: 20px;
+            width:100px;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        input[type=button]{
+            background-color: #023047;
+            color:#caf0f8;
+            padding: 7px;
+            font-family: 'Open Sans',sans-serif;
+            font-size: 15px;
+            border-radius: 10px;
+            letter-spacing: 2px;
+            border: none;
+        }
+        input[type=button]:hover{
+            background-color: #054e72;
+            cursor: pointer;
+        }
+        .info p{
+            font-family: 'Archivo',sans-serif;
+            font-size: 30px;
+            color: #023047;
+            letter-spacing: 2px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="brand-name"> Jumble Unit</div>
+        <ul>
+            <li><a href="#length-converter">Length</a></li>
+            <li><a href="#time-converter">Time</a></li>
+            <li><a href="#mass-converter">Mass</a></li>
+            <li><a href="#temperature-converter">Temperature</a></li>
+        </ul>
+    </nav>
+    <section class="top-section">
+        <div class="left-section">
+                <span>Welcome to Jumble Units</span>
+                <div class="anim">
+                    <div class="line"></div>
+                </div>
+                <p>
+                Having trouble in converting units?<br>
+                We got u! Convert units in no time
+            </p>
+        </div>
+        <div class="mid-section">
+            <div class="len">
+                <i class="fa-solid fa-ruler icon"></i>
+            </div>
+            <div class="mass">
+                <i class="fa-solid fa-weight-scale icon" style="color:#023047;"></i>
+            </div>
+            </div>
+            <div class="right-section">
+            <div class="time">
+                <i class="fa-regular fa-clock icon" ></i>
+            </div>
+            <div class="temp">
+                <i class="fa-solid fa-temperature-high icon" style="color:#023047"></i>
+            </div>
+        </div>
+    </section>
+    
+    <section class="length-converter">
+        <div class="info" style="display: flex;">
+            <i class="fa-solid fa-ruler icon"></i>
+            <p>Let's convert length !</p>
+        </div>
+        <div class="inner-length">
+            <form>
+                <label for="input-unit">Input Unit:</label>
+                <select class="input-unit" id="input-l-unit">
+                    <option id="cm">cm</option>
+                    <option id="m">m</option>
+                    <option id="in">in</option>
+                    <option id="ft">ft</option>
+                </select><br>
+                <label for="output-unit">Output Unit:</label>
+                <select class="output-unit" id="output-l-unit">
+                    <option id="cm">cm</option>
+                    <option id="m">m</option>
+                    <option id="in">in</option>
+                    <option id="ft">ft</option>
+                </select><br>
+                <label for="input-value">Input value:</label>
+                <input type="number" id="input-l-value"><br>
+                <input type="button" value="Convert" onclick="length()"><br>
+            </form>
+                <p class="output-value" id="output-l-value"></p>
+            
+        </div>
+    </section>
+    <section class="mass-converter">
+        <div class="info" style="display: flex;">
+            <i class="fa-solid fa-weight-scale icon"></i>
+            <p>Let's convert mass !</p>
+        </div>
+        <div class="inner-mass">
+            <form>
+                <label for="input-unit">Input Unit:</label>
+                <select class="input-unit" id="input-m-unit">
+                    <option id="kg">kg</option>
+                    <option id="g">g</option>
+                    <option id="ton">ton</option>
+                </select><br>
+                <label for="output-unit">Output Unit:</label>
+                <select class="output-unit" id="output-m-unit">
+                    <option id="kg">kg</option>
+                    <option id="g">g</option>
+                    <option id="ton">ton</option>
+                </select><br>
+                <label for="input-value">Input value:</label>
+                <input type="number" id="input-m-value"><br>
+                <input type="button" value="Convert"><br>
+                <div id="output-value-container">
+                    <p class="output-value" id="output-m-value"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="time-converter">
+        <div class="info" style="display: flex;">
+            <i class="fa-regular fa-clock icon" ></i>
+            <p>Let's convert time !</p>
+        </div>
+        <div class="inner-time">
+            <form>
+                <label for="input-unit">Input Unit:</label>
+                <select class="input-unit" id="input-t-unit">
+                    <option id="hr">hr</option>
+                    <option id="min">min</option>
+                    <option id="sec">sec</option>
+                </select><br>
+                <label for="output-unit">Output Unit:</label>
+                <select class="output-unit" id="output-t-unit">
+                    <option id="hr">hr</option>
+                    <option id="min">min</option>
+                    <option id="sec">sec</option>
+                </select><br>
+                <label for="input-value">Input value:</label>
+                <input type="number" id="input-t-value"><br>
+                <input type="button" value="Convert"><br>
+                <div id="output-value-container">
+                    <p class="output-value" id="output-t-value"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+    <section class="temperature-converter">
+        <div class="info" style="display: flex;">
+            <i class="fa-solid fa-temperature-high icon"></i>
+            <p>Let's convert temperature !</p>
+        </div>
+        <div class="inner-temp">
+            <form>
+                <label for="input-unit">Input Unit:</label>
+                <select class="input-unit" id="input-temp-unit">
+                    <option id="C">C</option>
+                    <option id="F">F</option>
+                    <option id="K">K</option>
+                </select><br>
+                <label for="output-unit">Output Unit:</label>
+                <select class="output-unit" id="output-temp-unit">
+                    <option id="C">C</option>
+                    <option id="F">F</option>
+                    <option id="K">K</option>
+                </select><br>
+                <label for="input-value">Input value:</label>
+                <input type="number" id="input-temp-value"><br>
+                <input type="button" value="Convert"><br>
+                <div id="output-value-container">
+                    <p class="output-value" id="output-temp-value"></p>
+                </div>
+            </form>
+        </div>
+    </section>
+    <script>
+        function length(){
+            const input_l_unit=document.getElementById("input-l-unit").value;
+            const output_l_unit=document.getElementById("output-l-unit").value;
+            const input_l_value=document.getElementById("input-l-value").value;
+
+            //converting input value to meters
+            let meters;
+            switch(input_l_unit){
+                case'cm':
+                    meters=input_l_value/100;
+                    break;
+                case 'in':
+                    meters=input_l_value*0.0254;
+                    break;
+                case 'ft':
+                    meters=input_l_value*0.3048;
+                    break;
+                case 'm':
+                    meters=input_l_value;
+                    break;
+            }
+            
+            //now converting meter value into output unit value
+            let output_l_value;
+            switch(output_l_unit){
+                case 'cm':
+                    output_l_value=meters*100;
+                    break;
+                case 'm':
+                    output_l_value=meters;
+                    break;
+                case 'in':
+                    output_l_value=meters*39.3701;
+                    break;
+                case 'ft':
+                    output_l_value=meters*3.28084;
+                    break;
+            }
+            alert(output_l_value);
+            const outputValueElement=document.getElementById("output-l-value");
+            outputValueElement.innerHTML=`${input_l_value} ${input_l_unit}=${output_l_value.toFixed(2)}${output_l_unit}`;
+        }
+    </script>
+    
+</body>
+</html>
