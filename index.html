@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jumble Units</title>
+    <link rel="stylesheet" href="responsiveness.css">
     <script src="https://kit.fontawesome.com/d3acb3ae7f.js" crossorigin="anonymous"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Archivo:ital@0;1&family=Open+Sans:wght@300&display=swap');
@@ -66,6 +67,9 @@
             display: flex;
             margin-top: 300px;
             margin-bottom: 200px;
+        }
+        .body{
+            overflow-x: hidden;
         }
 
         .left-section {
@@ -149,12 +153,6 @@
             animation-delay: 1s;
         }
 
-        .output-value-container {
-            background-color: #ffb500;
-            height: 20px;
-            width: 40px;
-        }
-
         @keyframes flow {
             0% {
                 transform: translateX(-100%);
@@ -184,7 +182,6 @@
             width: 100%;
             height: 600px;
             background-color: #bddcec;
-
             padding-top: 120px;
         }
 
@@ -262,6 +259,7 @@
         .left-footer,
         .right-footer {
             padding: 100px;
+            flex:50%; display: flex; flex-direction: column;
 
         }
 
@@ -457,7 +455,7 @@
         </div>
     </section>
     <footer style="background-color: #023047; display: flex; margin-top: 200px;">
-        <div class="left-footer" style="flex:50%; display: flex; flex-direction: column;">
+        <div class="left-footer">
             <div class="f-brand">JUMBLE UNIT</div>
             <div>
                 <a href="#">
@@ -471,7 +469,7 @@
                 </a>
             </div>
         </div>
-        <div class="right-footer" style="flex:50%; display: flex; flex-direction: column;">
+        <div class="right-footer">
             <div class="f-brand" style="margin-left: 15px;">Contacts</div>
             <ul>
                 <li>PHONE: </li>
