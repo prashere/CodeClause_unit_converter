@@ -17,9 +17,6 @@ function lengthConverter(){
         case 'ft':
             meters=input_l_value*0.3048;
             break;
-        case 'm':
-            meters=input_l_value;
-            break;
     }
     
     //now converting meter value into output unit value
@@ -29,7 +26,7 @@ function lengthConverter(){
             output_l_value=meters*100;
             break;
         case 'm':
-            output_l_value=meters;
+            output_l_value=input_l_value*1;
             break;
         case 'in':
             output_l_value=meters*39.3701;
@@ -55,9 +52,6 @@ function massConverter()
     //converting input value to kilograms first
     let kilograms;
     switch(input_m_unit){
-        case 'kg':
-            kilograms=input_m_value;
-            break;
         case 'g':
             kilograms=input_m_value/1000;
             break;
@@ -69,7 +63,7 @@ function massConverter()
     let output_m_value;
     switch(output_m_unit){
         case 'kg':
-            output_m_value=kilograms;
+            output_m_value=input_m_value*1;
             break;
         case 'g':
             output_m_value=kilograms*1000;
@@ -96,9 +90,6 @@ function timeConverter()
     //converting input value to minutes first
     let min;
     switch(input_t_unit){
-        case 'min':
-            min=input_t_value;
-            break;
         case 'sec':
             min=input_t_value/60;
             break;
@@ -110,7 +101,7 @@ function timeConverter()
     let output_t_value;
     switch(output_t_unit){
         case 'min':
-            output_t_value=min;
+            output_t_value=input_t_value*1;
             break;
         case 'sec':
             output_t_value=min*60;
@@ -138,7 +129,7 @@ function tempConverter()
     let celcius;
     switch(input_temp_unit){
         case 'C':
-            celcius=input_temp_value;
+            celcius=input_temp_value*1;
             break;
         case 'F':
             celcius=(input_temp_value - 32) * 5/9
@@ -151,7 +142,7 @@ function tempConverter()
     let output_temp_value;
     switch(output_temp_unit){
         case 'C':
-            output_temp_value=celcius;
+            output_temp_value=celcius*1;
             break;
         case 'F':
             output_temp_value=celcius * 9/5 + 32
