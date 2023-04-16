@@ -17,6 +17,8 @@ function lengthConverter(){
         case 'ft':
             meters=input_l_value*0.3048;
             break;
+        case 'm':
+            meters=input_l_value;
     }
     
     //now converting meter value into output unit value
@@ -26,7 +28,7 @@ function lengthConverter(){
             output_l_value=meters*100;
             break;
         case 'm':
-            output_l_value=input_l_value*1;
+            output_l_value=meters*1;
             break;
         case 'in':
             output_l_value=meters*39.3701;
@@ -58,6 +60,8 @@ function massConverter()
         case 'ton':
             kilograms=input_m_value*1000;
             break;
+        case 'kg':
+            kilograms=input_m_value;
     }
     //now converting kilograms to output unit
     let output_m_value;
@@ -96,12 +100,14 @@ function timeConverter()
         case 'hr':
             min=input_t_value*60;
             break;
+        case 'min':
+            min=input_t_value;
     }
     //now converting min to output unit
     let output_t_value;
     switch(output_t_unit){
         case 'min':
-            output_t_value=input_t_value*1;
+            output_t_value=min*1;
             break;
         case 'sec':
             output_t_value=min*60;
